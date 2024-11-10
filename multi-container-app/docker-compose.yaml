@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  mongodb:
+    image: 'mongo'
+    volumes:
+      - D:/projects/Docker/multi-container-app/mongodb_data/:/data/db
+    #container_name: mongodb
+    #environment: -- set environment variable
+      #- MONGO_INITDB_ROOT_USERNAME=tamal
+      #- MONGO_INITDB_ROOT_PASSWORD=1234
+    #env_file: -- specify the file which contains environment variables used in this code
+      #- ./env/mongo.env
+    #networks: -- to specify a network else default
+     # - mynetwork
+  backend:  
+    #build: ./multi-container-backend
+    build:
+      context: ./multi-container-backend
+      dockerfile: Dockerfile
+      #args:
+       # - somearg=val --- if you specify ARG in dockerfile then those values will be passed from here
+    ports:
+      - '80:80'
+    depends_on:
+      - mongodb  
+  frontend:
+    build: 
+      context: ./multi-container-frontend
+      dockerfile: Dockerfile
+    ports:
+      - '1100:1234'
+    depends_on:
+      - mongodb
+      - backend
+    stdin_open: true
+    tty: true
+
+
+#volumes: --required for named monuts , for anonymous and bind mounts not required
+ # - data:
