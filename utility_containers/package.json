@@ -1,0 +1,15 @@
+{
+  "name": "node-using-docker-image",
+  "version": "1.0.0",
+  "description": "node package using from docker image",
+  "main": "index.js",
+  "scripts": {
+    "test": "Zest"
+  },
+  "author": "Tamal Koley",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1"
+  }
+}
